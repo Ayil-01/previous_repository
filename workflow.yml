@@ -1,0 +1,31 @@
+# .github/workflows/demo.yml (文件名可自定义，后缀必须是 .yml 或 .yaml)
+# Workflow 名称（可选，用于在 GitHub 界面显示）
+name: 示例Workflow
+
+# 触发条件：当向 main 分支推送代码时执行
+on:
+  push:
+    branches: [ main ]
+  # 也可以添加手动触发（方便测试）
+  workflow_dispatch:
+
+# 任务集合（所有 job 都写在这里）
+jobs:
+  # 第一个 job，名字自定义（比如叫 "hello-world"）
+  hello-world:
+    # 指定运行环境（常用 ubuntu-latest）
+    runs-on: ubuntu-latest
+    
+    # ✅ steps 必须写在 job 内部，这里是正确位置
+    steps:
+      # 步骤1：检出仓库代码（几乎所有 Workflow 都需要这一步）
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      # 步骤2：执行一个简单的命令（示例）
+      - name: 输出欢迎信息
+        run: echo "Hello GitHub Actions! 👋"
+
+      # 步骤3：可选 - 查看当前目录（辅助调试）
+      - name: 查看目录文件
+        run: ls -la
